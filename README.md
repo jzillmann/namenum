@@ -1,2 +1,5 @@
-# namenum
-Simple web app for numerology on names.
+# Name Num
+
+Simple web app for numerology on names. 
+
+Testing out [Svelte](https://svelte.dev)...
