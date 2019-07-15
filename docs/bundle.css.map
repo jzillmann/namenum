@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "bundle.css",
+  "sources": [
+    "../src/App.svelte"
+  ],
+  "sourcesContent": [
+    "<script>\n    export let version;\n    const numberMapping = {\n        1: [\"a\", \"j\", \"s\"],\n        2: [\"b\", \"k\", \"t\", \"ö\", \"ß\"],\n        3: [\"c\", \"l\", \"u\"],\n        4: [\"d\", \"m\", \"v\"],\n        5: [\"e\", \"n\", \"w\"],\n        6: [\"f\", \"o\", \"x\", \"ä\"],\n        7: [\"g\", \"p\", \"y\"],\n        8: [\"h\", \"q\", \"z\", \"ü\"],\n        9: [\"i\", \"r\"]\n    }\n    const charMap = new Map(Object.keys(numberMapping).flatMap(function (key) {\n        return numberMapping[key].map(char => [char, Number(key)])\n    }));\n\n    let name = \"\";\n    let chars = [];\n    let charNumbers = [];\n    let number;\n    $: {\n        chars = [...name.toLowerCase()];\n        charNumbers = chars.map(char => charMap.get(char));\n        number = charNumbers.reduce((sum, charNumber) => sum + charNumber, 0);\n    }\n\t// TODO recursivly resolve final number\n\t// TODO handle invalid characters\n</script>\n\n<style>\n    h1 {\n        color: purple;\n    }\n\n    .centered {\n        text-align: center;\n    }\n</style>\n\n<h1 class=\"centered\">Name Numerology Calculator {version}</h1>\n\n<div class=\"centered\">\n    <form autocomplete=\"off\" spellcheck=\"off\">\n        <input bind:value={name} type=\"text\" autofocus />\n    </form>\n    <hr />\n    <br />\n    <div>{chars.join(\" \")}</div>\n    <div>{charNumbers.join(\" \")}</div>\n    <br />\n    <div><b>{number}</b></div>\n</div>"
+  ],
+  "names": [],
+  "mappings": "AA+BI,EAAE,eAAC,CAAC,AACA,KAAK,CAAE,MAAM,AACjB,CAAC,AAED,SAAS,eAAC,CAAC,AACP,UAAU,CAAE,MAAM,AACtB,CAAC"
+}
