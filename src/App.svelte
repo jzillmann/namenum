@@ -41,8 +41,9 @@
 <h1 class="centered">Name Numerology Calculator {version}</h1>
 
 <div class="centered">
-    <form autocomplete="off" spellcheck="off">
-        <input bind:value={name} type="text" autofocus />
+    <form>
+        <input bind:value={name} type="text" autofocus autocomplete="off" autocorrect="off" autocapitalize="off"
+            spellcheck="false" />
     </form>
     <hr />
     <br />
