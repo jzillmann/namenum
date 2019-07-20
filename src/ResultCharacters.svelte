@@ -59,6 +59,7 @@
         </tr>
     </table>
     {#if partCount >1}
+        <br/>
         <ResultNumber numbers={charNumbers} />
     {/if}
 </div>

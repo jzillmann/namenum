@@ -18,5 +18,14 @@
 </script>
 
 <div>
-    <b>{crossfoots.join(' / ')}</b>
+    {#each crossfoots as crossfoot, i}
+        {#if i>0}
+            {' / '}
+        {/if}
+        {#if i==crossfoots.length-1 && i >0}
+            <u><b>{crossfoot}</b></u>
+        {:else}
+            <b>{crossfoot}</b>
+        {/if}
+    {/each}
 </div>
