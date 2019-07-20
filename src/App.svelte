@@ -1,6 +1,7 @@
 <script>
 
     import ResultCharacters from './ResultCharacters.svelte';
+    import ResultNumber from './ResultNumber.svelte';
 
     export let version;
     const numberMapping = {
@@ -22,7 +23,6 @@
     let nameParts = [];
     let charParts = [];
     let charNumberParts = [];
-    let number;
     $: {
         nameParts = name
             .toLowerCase()
@@ -36,9 +36,7 @@
             }
             return charMap.get(char);
         }));
-        number = charNumberParts.flat().reduce((sum, charNumber) => sum + charNumber, 0);
     }
-	// TODO recursivly resolve final number
 	// TODO handle invalid characters
 </script>
 
@@ -65,11 +63,11 @@
     <div style="display:flex; flex-direction: row; justify-content: center">
         {#each nameParts as namePart,i }
             {#if i>0}
-                {' . '}
+                &nbsp;&nbsp;&nbsp;
             {/if}
-            <ResultCharacters chars={charParts[i]} charNumbers={charNumberParts[i]} />
+            <ResultCharacters chars={charParts[i]} charNumbers={charNumberParts[i]} partCount={charParts.length} />
         {/each}
     </div>
     <br />
-    <div><b>{number}</b></div>
+    <ResultNumber numbers = {charNumberParts.flat()}/>
 </div>
