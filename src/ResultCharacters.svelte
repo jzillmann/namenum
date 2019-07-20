@@ -4,6 +4,22 @@
     export let chars;
     export let charNumbers;
     export let partCount;
+
+    function highlightElements(elementId) {
+        var elements = document.getElementsByClassName(elementId);
+        var n = elements.length;
+        for (var i = 0; i < n; i++) {
+            elements[i].classList.add("highlighted");
+        }
+    }
+
+    function lowlightElements(elementId) {
+        var elements = document.getElementsByClassName(elementId);
+        var n = elements.length;
+        for (var i = 0; i < n; i++) {
+            elements[i].classList.remove("highlighted");
+        }
+    }
 </script>
 
 <style>
@@ -12,34 +28,29 @@
         border-bottom: 1pt solid #ccc;
     }
 
-    td,
-    th {
-        position: relative;
-    }
-
-    td:hover::after,
-    th:hover::after {
-        content: "";
-        position: absolute;
+    .highlighted {
         background-color: rgb(167, 167, 236);
-        left: 0;
-        top: -5000px;
-        height: 10000px;
-        width: 100%;
-        z-index: -1;
     }
 </style>
 
 <div>
     <table>
         <tr>
-            {#each chars as char}
-                <td>{char}</td>
+            {#each chars as char }
+                <td class={"char_"+char } 
+                    on:mouseover={ ()=> highlightElements("char_"+char)}
+                    on:mouseout={ ()=> lowlightElements("char_"+char)}
+                >{char}
+                </td>
             {/each}
         </tr>
         <tr>
             {#each charNumbers as charNumber}
-                <td>{charNumber}</td>
+                <td class={"num_"+charNumber }
+                    on:mouseover={ ()=> highlightElements("num_"+charNumber)}
+                    on:mouseout={ ()=> lowlightElements("num_"+charNumber)}
+                >{charNumber}
+                </td>
             {/each}
         </tr>
     </table>
