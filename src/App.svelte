@@ -30,7 +30,12 @@
             .filter(elem => elem !== "");
 
         charParts = nameParts.map(namePart => [...namePart.toLowerCase()].filter(char => char !== ' '));
-        charNumberParts = charParts.map(charPart => charPart.map(char => charMap.get(char)));
+        charNumberParts = charParts.map(charPart => charPart.map(char => {
+            if (!isNaN(char)) {
+                return Number(char);
+            }
+            return charMap.get(char);
+        }));
         number = charNumberParts.flat().reduce((sum, charNumber) => sum + charNumber, 0);
     }
 	// TODO recursivly resolve final number
