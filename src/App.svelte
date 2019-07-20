@@ -1,4 +1,7 @@
 <script>
+
+    import CharacterResult from './CharacterResult.svelte';
+
     export let version;
     const numberMapping = {
         1: ["a", "j", "s"],
@@ -47,8 +50,7 @@
     </form>
     <hr />
     <br />
-    <div>{chars.join(" ")}</div>
-    <div>{charNumbers.join(" ")}</div>
+    <CharacterResult {chars} {charNumbers} />
     <br />
     <div><b>{number}</b></div>
 </div>
