@@ -1,3 +1,4 @@
+import replace from 'rollup-plugin-replace';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -15,6 +16,14 @@ export default {
         file: 'public/bundle.js'
     },
     plugins: [
+
+        replace({
+            include: 'src/main.js',
+            exclude: 'node_modules/**',
+            delimiters: ['${', '}'],
+            VERSION: process.env.npm_package_version
+        }),
+
         svelte({
             // enable run-time checks when not in production
             dev: !production,
