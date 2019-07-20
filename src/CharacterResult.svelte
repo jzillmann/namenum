@@ -6,8 +6,6 @@
 <style>
     table {
         overflow: hidden;
-        margin-left: auto;
-        margin-right: auto;
     }
 
     td,

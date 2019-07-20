@@ -19,13 +19,19 @@
     }));
 
     let name = "";
-    let chars = [];
-    let charNumbers = [];
+    let nameParts = [];
+    let charParts = [];
+    let charNumberParts = [];
     let number;
     $: {
-        chars = [...name.toLowerCase()];
-        charNumbers = chars.map(char => charMap.get(char));
-        number = charNumbers.reduce((sum, charNumber) => sum + charNumber, 0);
+        nameParts = name
+            .toLowerCase()
+            .split(" ")
+            .filter(elem => elem !== "");
+
+        charParts = nameParts.map(namePart => [...namePart.toLowerCase()].filter(char => char !== ' '));
+        charNumberParts = charParts.map(charPart => charPart.map(char => charMap.get(char)));
+        number = charNumberParts.flat().reduce((sum, charNumber) => sum + charNumber, 0);
     }
 	// TODO recursivly resolve final number
 	// TODO handle invalid characters
@@ -50,7 +56,15 @@
     </form>
     <hr />
     <br />
-    <CharacterResult {chars} {charNumbers} />
+
+    <div style="display:flex; flex-direction: row; justify-content: center">
+        {#each nameParts as namePart,i }
+            {#if i>0}
+                {' . '}
+            {/if}
+            <CharacterResult chars={charParts[i]} charNumbers={charNumberParts[i]} />
+        {/each}
+    </div>
     <br />
     <div><b>{number}</b></div>
 </div>
