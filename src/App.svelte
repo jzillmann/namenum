@@ -1,29 +1,52 @@
 <script>
 
+    import CharacterMapping from './CharacterMapping.svelte';
     import ResultCharacters from './ResultCharacters.svelte';
     import ResultNumber from './ResultNumber.svelte';
 
     export let version;
-    const numberMapping = {
-        1: ["a", "j", "s"],
-        2: ["b", "k", "t", "ö", "ß"],
-        3: ["c", "l", "u"],
-        4: ["d", "m", "v"],
-        5: ["e", "n", "w"],
-        6: ["f", "o", "x", "ä"],
-        7: ["g", "p", "y"],
-        8: ["h", "q", "z", "ü"],
-        9: ["i", "r"]
-    }
-    const charMap = new Map(Object.keys(numberMapping).flatMap(function (key) {
-        return numberMapping[key].map(char => [char, Number(key)])
-    }));
 
+    let numberMapping;
     let name = "";
     let nameParts = [];
     let charParts = [];
     let charNumberParts = [];
+    let selectedMapping = "Chaldean";
     $: {
+        switch (selectedMapping) {
+            case "Chaldean":
+                numberMapping = {
+                    1: ["a", "i", "j", "q", "y"],
+                    2: ["b", "k", "r"],
+                    3: ["c", "g", "l", "s"],
+                    4: ["d", "m", "t"],
+                    5: ["e", "h", "n", "x"],
+                    6: ["u", "v", "w"],
+                    7: ["o", "z"],
+                    8: ["f", "p"]
+                }
+                break;
+            case "Phytagorean":
+                numberMapping = {
+                    1: ["a", "j", "s"],
+                    2: ["b", "k", "t", "ö", "ß"],
+                    3: ["c", "l", "u"],
+                    4: ["d", "m", "v"],
+                    5: ["e", "n", "w"],
+                    6: ["f", "o", "x", "ä"],
+                    7: ["g", "p", "y"],
+                    8: ["h", "q", "z", "ü"],
+                    9: ["i", "r"]
+                }
+                break;
+            default:
+                alert("No mapping defined for " + selectedMapping);
+        }
+
+        const charMap = new Map(Object.keys(numberMapping).flatMap(function (key) {
+            return numberMapping[key].map(char => [char, Number(key)])
+        }));
+
         nameParts = name
             .toLowerCase()
             .split(" ")
@@ -55,6 +78,14 @@
     <form>
         <input bind:value={name} type="text" autofocus autocomplete="off" autocorrect="off" autocapitalize="off"
             spellcheck="false" />
+        &nbsp;&nbsp;&nbsp;
+        <select bind:value={selectedMapping}>
+            <option value="Chaldean">Chaldean</option>
+            <option value="Phytagorean">Phytagorean</option>
+        </select>
+        <div style="display:flex; flex-direction: column; justify-content: center">
+            <CharacterMapping {numberMapping} />
+        </div>
     </form>
     <hr />
     <br />

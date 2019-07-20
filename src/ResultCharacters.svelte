@@ -24,7 +24,6 @@
 
 <style>
     table {
-        overflow: hidden;
         border-bottom: 1pt solid #ccc;
     }
 
