@@ -3,7 +3,7 @@
     let crossfoots = [];
     $: {
         crossfoots = [];
-        let currentCrossfootNumbers = numbers;
+        let currentCrossfootNumbers = numbers.filter(number => !isNaN(number));
         do {
             let nextCrossfoot = calculateCrossfoot(currentCrossfootNumbers);
             crossfoots = [...crossfoots, nextCrossfoot];

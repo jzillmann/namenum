@@ -46,11 +46,15 @@
         </tr>
         <tr>
             {#each charNumbers as charNumber}
-                <td class={"num_"+charNumber }
-                    on:mouseover={ ()=> highlightElements("num_"+charNumber)}
-                    on:mouseout={ ()=> lowlightElements("num_"+charNumber)}
-                >{charNumber}
+                {#if isNaN(charNumber)}
+                    <td>?</td>
+                {:else}
+                    <td class={"num_"+charNumber }
+                        on:mouseover={ ()=> highlightElements("num_"+charNumber)}
+                        on:mouseout={ ()=> lowlightElements("num_"+charNumber)}
+                    >{charNumber}
                 </td>
+                {/if}
             {/each}
         </tr>
     </table>

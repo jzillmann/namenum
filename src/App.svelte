@@ -37,7 +37,6 @@
             return charMap.get(char);
         }));
     }
-	// TODO handle invalid characters
 </script>
 
 <style>
