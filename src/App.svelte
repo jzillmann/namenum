@@ -76,14 +76,15 @@
 
 <div class="centered">
     <form>
-        <input bind:value={name} type="text" autofocus autocomplete="off" autocorrect="off" autocapitalize="off"
-            spellcheck="false" />
-        &nbsp;&nbsp;&nbsp;
-        <select bind:value={selectedMapping}>
-            <option value="Chaldean">Chaldean</option>
-            <option value="Phytagorean">Phytagorean</option>
-        </select>
-        <div style="display:flex; flex-direction: column; justify-content: center">
+        <div style="display:flex; flex-direction: row; justify-content: center; align-items: flex-start">
+            <input bind:value={name} type="text" autofocus autocomplete="off" autocorrect="off" autocapitalize="off"
+                spellcheck="false" />
+            &nbsp;&nbsp;&nbsp;
+            <select bind:value={selectedMapping}>
+                <option value="Chaldean">Chaldean</option>
+                <option value="Phytagorean">Phytagorean</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;
             <CharacterMapping {numberMapping} />
         </div>
     </form>
