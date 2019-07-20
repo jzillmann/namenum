@@ -1,6 +1,6 @@
 <script>
 
-    import CharacterResult from './CharacterResult.svelte';
+    import ResultCharacters from './ResultCharacters.svelte';
 
     export let version;
     const numberMapping = {
@@ -67,7 +67,7 @@
             {#if i>0}
                 {' . '}
             {/if}
-            <CharacterResult chars={charParts[i]} charNumbers={charNumberParts[i]} />
+            <ResultCharacters chars={charParts[i]} charNumbers={charNumberParts[i]} />
         {/each}
     </div>
     <br />
