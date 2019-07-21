@@ -90,7 +90,7 @@
 <h1 class="centered">Name Numerology Calculator {version}</h1>
 
 <div class="centered">
-    <div style="display:flex; flex-direction: row; justify-content: center; align-items: flex-start">
+    <div style="display:flex; flex-direction: row; justify-content: center; align-items: flex-start; flex-wrap:wrap">
         <input bind:value={name} type="text" autofocus autocomplete="off" autocorrect="off" autocapitalize="off"
             spellcheck="false" />
         &nbsp;&nbsp;&nbsp;
