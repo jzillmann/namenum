@@ -1,5 +1,6 @@
 <script>
 
+    import { fade } from 'svelte/transition';
     import CharacterMapping from './CharacterMapping.svelte';
     import ResultCharacters from './ResultCharacters.svelte';
     import ResultNumber from './ResultNumber.svelte';
@@ -7,11 +8,13 @@
     export let version;
 
     let numberMapping;
+    let mappingNumbers;
     let name = "";
     let nameParts = [];
     let charParts = [];
     let charNumberParts = [];
     let selectedMapping = "Chaldean";
+    let showMapping = false;
     $: {
         switch (selectedMapping) {
             case "Chaldean":
@@ -43,6 +46,11 @@
                 alert("No mapping defined for " + selectedMapping);
         }
 
+        mappingNumbers = Object.keys(numberMapping).reduce((newObject, number) => {
+            newObject[number] = [];
+            return newObject;
+        }, {});
+
         const charMap = new Map(Object.keys(numberMapping).flatMap(function (key) {
             return numberMapping[key].map(char => [char, Number(key)])
         }));
@@ -60,6 +68,7 @@
             return charMap.get(char);
         }));
     }
+
 </script>
 
 <style>
@@ -69,6 +78,12 @@
 
     .centered {
         text-align: center;
+    }
+
+    /*Keep all other flexbox elements stable when showing the mapping*/
+    .fixedWidth {
+        width: 180px;
+        text-align: left;
     }
 </style>
 
@@ -85,7 +100,15 @@
                 <option value="Phytagorean">Phytagorean</option>
             </select>
             &nbsp;&nbsp;&nbsp;
-            <CharacterMapping {numberMapping} />
+            {#if showMapping}
+                <span class="fixedWidth" on:click={()=>showMapping=!showMapping} in:fade="{{ duration: 200 }}" >
+                    <CharacterMapping {numberMapping} />
+                </span>
+            {:else} 
+                <span class="fixedWidth" on:click={()=>showMapping=!showMapping} in:fade="{{ duration: 200 }}" >
+                    <CharacterMapping numberMapping={mappingNumbers} />
+                </span>
+            {/if}
         </div>
     </form>
     <hr />

@@ -5,6 +5,10 @@
 </script>
 
 <style>
+    table {
+        background-color: rgb(251, 251, 255);
+    }
+
     th {
         color: rgb(96, 170, 100);
     }
