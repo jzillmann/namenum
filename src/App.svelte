@@ -80,6 +80,10 @@
         text-align: center;
     }
 
+    .input {
+        padding: 0;
+    }
+
     /*Keep all other flexbox elements stable when showing the mapping*/
     .fixedWidth {
         width: 132px;
@@ -91,8 +95,8 @@
 
 <div class="centered">
     <div style="display:flex; flex-direction: row; justify-content: center; align-items: flex-start; flex-wrap:wrap">
-        <input bind:value={name} type="text" autofocus autocomplete="off" autocorrect="off" autocapitalize="off"
-            spellcheck="false" />
+        <input bind:value={name} type="text" class="input" autofocus autocomplete="off" autocorrect="off"
+            autocapitalize="off" spellcheck="false" />
         &nbsp;&nbsp;&nbsp;
         <select bind:value={selectedMapping}>
             <option value="Chaldean">Chaldean</option>
