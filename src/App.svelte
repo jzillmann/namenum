@@ -82,7 +82,7 @@
 
     /*Keep all other flexbox elements stable when showing the mapping*/
     .fixedWidth {
-        width: 180px;
+        width: 132px;
         text-align: left;
     }
 </style>
@@ -90,17 +90,16 @@
 <h1 class="centered">Name Numerology Calculator {version}</h1>
 
 <div class="centered">
-    <form>
-        <div style="display:flex; flex-direction: row; justify-content: center; align-items: flex-start">
-            <input bind:value={name} type="text" autofocus autocomplete="off" autocorrect="off" autocapitalize="off"
-                spellcheck="false" />
-            &nbsp;&nbsp;&nbsp;
-            <select bind:value={selectedMapping}>
-                <option value="Chaldean">Chaldean</option>
-                <option value="Phytagorean">Phytagorean</option>
-            </select>
-            &nbsp;&nbsp;&nbsp;
-            {#if showMapping}
+    <div style="display:flex; flex-direction: row; justify-content: center; align-items: flex-start">
+        <input bind:value={name} type="text" autofocus autocomplete="off" autocorrect="off" autocapitalize="off"
+            spellcheck="false" />
+        &nbsp;&nbsp;&nbsp;
+        <select bind:value={selectedMapping}>
+            <option value="Chaldean">Chaldean</option>
+            <option value="Phytagorean">Phytagorean</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;
+        {#if showMapping}
                 <span class="fixedWidth" on:click={()=>showMapping=!showMapping} in:fade="{{ duration: 200 }}" >
                     <CharacterMapping {numberMapping} />
                 </span>
@@ -109,8 +108,7 @@
                     <CharacterMapping numberMapping={mappingNumbers} />
                 </span>
             {/if}
-        </div>
-    </form>
+    </div>
     <hr />
     <br />
 
