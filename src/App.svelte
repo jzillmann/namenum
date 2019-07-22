@@ -80,7 +80,7 @@
     }
 </style>
 
-<h1 class="centered">Name Numerology Calculator {version}</h1>
+<h1 class="centered">Name Numerology Calculator</h1>
 
 <div class="centered">
     <div style="display:flex; flex-direction: row; justify-content: center; align-items: flex-start; flex-wrap:wrap">
@@ -115,4 +115,8 @@
     </div>
     <br />
     <ResultNumber numbers = {charNumberParts.flat()}/>
+
+    <div class="footer">
+        <a href="https://github.com/jzillmann/nanuca">Nanuca {version}</a>
+    </div>
 </div>

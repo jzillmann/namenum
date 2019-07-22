@@ -1,8 +1,10 @@
 :root {
+	/*palette: #011f4b • #03396c • #005b96 • #6497b1 • #b3cde0*/
 	--color1: #011f4b;
 	--color2: #b3cde0;
 	--color3: #6497b1;
-	--color4: green;
+	--color4: #005b96;
+	--color5: #03396c;
 }
 
 html, body {
@@ -50,14 +52,15 @@ input, button, select, textarea {
 }
 
 a {
-	color: rgb(0,100,200);
-	text-decoration: none;
+	color: var(--color3);
 }
 
-a:hover {
-	text-decoration: underline;
-}
-
-a:visited {
-	color: rgb(0,80,160);
-}
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: var(--color5);
+	color: var(--color3);
+	text-align: center;
+  }
