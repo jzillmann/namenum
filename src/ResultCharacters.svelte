@@ -24,7 +24,7 @@
 
 <style>
     table {
-        border-bottom: 1pt solid var(--color2);
+        border-bottom: 1pt solid var(--color3);
     }
     
     .highlighted {
