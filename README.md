@@ -1,4 +1,4 @@
-# Name Num
+# Nanuca
 
 Simple web app for numerology on names. 
 
