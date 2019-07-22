@@ -6,11 +6,16 @@
 
 <style>
     table {
-        background-color: rgb(251, 251, 255);
+        color: var(--color3);
+        padding: 0.1em
     }
-
-    th {
-        color: rgb(96, 170, 100);
+    
+    table:hover {
+        cursor: pointer;
+    }
+    
+    td {
+        color: var(--color4);
     }
 </style>
 

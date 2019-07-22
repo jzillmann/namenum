@@ -24,11 +24,11 @@
 
 <style>
     table {
-        border-bottom: 1pt solid #ccc;
+        border-bottom: 1pt solid var(--color2);
     }
-
+    
     .highlighted {
-        background-color: rgb(167, 167, 236);
+        background-color: var(--color3);
     }
 </style>
 

@@ -72,17 +72,6 @@
 </script>
 
 <style>
-    h1 {
-        color: purple;
-    }
-
-    .centered {
-        text-align: center;
-    }
-
-    .input {
-        padding: 0;
-    }
 
     /*Keep all other flexbox elements stable when showing the mapping*/
     .fixedWidth {
@@ -95,7 +84,7 @@
 
 <div class="centered">
     <div style="display:flex; flex-direction: row; justify-content: center; align-items: flex-start; flex-wrap:wrap">
-        <input bind:value={name} type="text" class="input" autofocus autocomplete="off" autocorrect="off"
+        <input bind:value={name} type="text" autofocus autocomplete="off" autocorrect="off"
             autocapitalize="off" spellcheck="false" />
         &nbsp;&nbsp;&nbsp;
         <select bind:value={selectedMapping}>

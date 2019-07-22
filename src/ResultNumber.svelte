@@ -17,13 +17,22 @@
 
 </script>
 
+<style>
+    div {
+        color: var(--color4);
+    }
+    .underlined {
+        border-bottom: 1pt solid var(--color4);
+    }
+</style>
+
 <div>
     {#each crossfoots as crossfoot, i}
         {#if i>0}
             {' / '}
         {/if}
         {#if i==crossfoots.length-1 && i >0}
-            <u><b>{crossfoot}</b></u>
+            <b class="underlined">{crossfoot}</b>
         {:else}
             <b>{crossfoot}</b>
         {/if}
