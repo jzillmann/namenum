@@ -1,5 +1,7 @@
-h1.svelte-1gq2uqf{color:purple}.centered.svelte-1gq2uqf{text-align:center}.input.svelte-1gq2uqf{padding:0}.fixedWidth.svelte-1gq2uqf{width:132px;text-align:left}
-table.svelte-v742p0{background-color:rgb(251, 251, 255)}th.svelte-v742p0{color:rgb(96, 170, 100)}
-table.svelte-1800pq5{border-bottom:1pt solid #ccc}.highlighted.svelte-1800pq5{background-color:rgb(167, 167, 236)}
+.fixedWidth.svelte-8vk6hb{width:132px;text-align:left}
+table.svelte-1arlmie{color:var(--color3);padding:0.1em
+    }table.svelte-1arlmie:hover{cursor:pointer}td.svelte-1arlmie{color:var(--color4)}
+table.svelte-18nl4ih{border-bottom:1pt solid var(--color2)}.highlighted.svelte-18nl4ih{background-color:var(--color3)}
+div.svelte-pzzlyh{color:var(--color4)}.underlined.svelte-pzzlyh{border-bottom:1pt solid var(--color4)}
 
 /*# sourceMappingURL=bundle.css.map */
