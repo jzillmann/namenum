@@ -1,21 +1,25 @@
 <script>
 
-    import { fade } from 'svelte/transition';
+    import { fade, crossfade } from 'svelte/transition';
+    import { quintOut } from 'svelte/easing';
+    import { flip } from 'svelte/animate';
     import CharacterMapping from './CharacterMapping.svelte';
-    import ResultCharacters from './ResultCharacters.svelte';
-    import ResultNumber from './ResultNumber.svelte';
+    import Result from './Result.svelte';
 
     export let version;
 
+    let name = "";
     let numberMapping;
     let mappingNumbers;
-    let name = "";
-    let nameParts = [];
-    let charParts = [];
-    let charNumberParts = [];
+    let charMap;
     let selectedMapping = "Chaldean";
     let showMapping = false;
+
+    let uid = -1;
+    let results = [freshResult()];
     $: {
+        results[uid].name = name;
+
         switch (selectedMapping) {
             case "Chaldean":
                 numberMapping = {
@@ -51,41 +55,53 @@
             return newObject;
         }, {});
 
-        const charMap = new Map(Object.keys(numberMapping).flatMap(function (key) {
+        charMap = new Map(Object.keys(numberMapping).flatMap(function (key) {
             return numberMapping[key].map(char => [char, Number(key)])
         }));
+    }
 
-        nameParts = name
-            .toLowerCase()
-            .split(" ")
-            .filter(elem => elem !== "");
+    const [send, receive] = crossfade({
+        duration: d => Math.sqrt(d * 2000),
 
-        charParts = nameParts.map(namePart => [...namePart.toLowerCase()].filter(char => char !== ' '));
-        charNumberParts = charParts.map(charPart => charPart.map(char => {
-            if (!isNaN(char)) {
-                return Number(char);
-            }
-            return charMap.get(char);
-        }));
+        fallback(node, params) {
+            const style = getComputedStyle(node);
+            const transform = style.transform === 'none' ? '' : style.transform;
+
+            return {
+                duration: 600,
+                easing: quintOut,
+                css: t => `
+					transform: ${transform} scale(${t});
+					opacity: ${t}
+				`
+            };
+        }
+    });
+
+    let pinnedResults = [];
+    let inputElement;
+    function pinResult() {
+        if (name !== "") {
+            const resultToPin = results.filter(r => !r.pinned)[0];
+            resultToPin.pinned = true;
+            results = [...results, freshResult()];
+            name = "";
+        }
+        inputElement.focus();
+    }
+
+    function freshResult() {
+        return { id: uid++, name, pinned: false };
     }
 
 </script>
-
-<style>
-
-    /*Keep all other flexbox elements stable when showing the mapping*/
-    .fixedWidth {
-        width: 132px;
-        text-align: left;
-    }
-</style>
 
 <h1 class="centered">Name Numerology Calculator</h1>
 
 <div class="centered">
     <div style="display:flex; flex-direction: row; justify-content: center; align-items: flex-start; flex-wrap:wrap">
-        <input bind:value={name} type="text" autofocus autocomplete="off" autocorrect="off"
-            autocapitalize="off" spellcheck="false" />
+        <input bind:this={inputElement} bind:value={name} type="text" autofocus autocomplete="off" autocorrect="off"
+            autocapitalize="off" spellcheck="false" on:keydown={e=> e.which === 13 && pinResult()}/>
         &nbsp;&nbsp;&nbsp;
         <select bind:value={selectedMapping}>
             <option value="Chaldean">Chaldean</option>
@@ -93,30 +109,69 @@
         </select>
         &nbsp;&nbsp;&nbsp;
         {#if showMapping}
-                <span class="fixedWidth" on:click={()=>showMapping=!showMapping} in:fade="{{ duration: 200 }}" >
-                    <CharacterMapping {numberMapping} />
-                </span>
-            {:else} 
-                <span class="fixedWidth" on:click={()=>showMapping=!showMapping} in:fade="{{ duration: 200 }}" >
-                    <CharacterMapping numberMapping={mappingNumbers} />
-                </span>
-            {/if}
+            <span class="fixedWidth" on:click={()=>showMapping=!showMapping} in:fade="{{ duration: 200 }}" >
+                <CharacterMapping {numberMapping} />
+            </span>
+        {:else}
+            <span class="fixedWidth" on:click={()=>showMapping=!showMapping} in:fade="{{ duration: 200 }}" >
+                <CharacterMapping numberMapping={mappingNumbers} />
+            </span>
+        {/if}
     </div>
     <hr />
     <br />
 
-    <div style="display:flex; flex-direction: row; justify-content: center">
-        {#each nameParts as namePart,i }
-            {#if i>0}
-                &nbsp;&nbsp;&nbsp;
-            {/if}
-            <ResultCharacters chars={charParts[i]} charNumbers={charNumberParts[i]} partCount={charParts.length} />
+    &nbsp;&nbsp;&nbsp;
+    {#each results.filter(r => !r.pinned) as result (result.id)}
+        <label in:receive="{{key: result.id}}" out:send="{{key: result.id}}" animate:flip>
+            <Result name={result.name} {charMap} />
+        </label>
+    {/each}
+
+    {#if name !==""}
+        <button on:click="{() => pinResult()}">Pin</button>
+    {/if}
+
+    <br/><br/><br/><br/>
+    {#if results.filter(r => r.pinned).length > 0}
+        <h3 in:fade>Pinned Items</h3>
+        {#each results.filter(r => r.pinned) as result (result.id)}
+            <label in:receive="{{key: result.id}}" out:send="{{key: result.id}}" animate:flip>
+                <Result name={result.name} {charMap} />
+                <br />
+            </label>
         {/each}
-    </div>
-    <br />
-    <ResultNumber numbers = {charNumberParts.flat()}/>
+    {/if}
 
     <div class="footer">
         <a href="https://github.com/jzillmann/nanuca">Nanuca {version}</a>
     </div>
 </div>
+
+<style>
+    /*Keep all other flexbox elements stable when showing the mapping*/
+    .fixedWidth {
+        width: 132px;
+        text-align: left;
+    }
+
+    td {
+        color: var(--color4);
+    }
+
+    h3 {
+        color: var(--color3);
+    }
+
+    .colored {
+        color: red;
+    }
+
+    .left {
+        text-align: left;
+    }
+
+    .right {
+        text-align: right;
+    }
+</style>
