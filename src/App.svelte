@@ -119,17 +119,14 @@
         {/if}
     </div>
     <hr />
-    <br />
 
-    <div style="display:flex; flex-direction: row; justify-content: center; align-items:flex-start">
-        <div style="display:flex; flex-direction: row; justify-content: center">
-        {#each results.filter(r => !r.pinned) as result (result.id)}
-            <label class="card" in:receive="{{key: result.id}}" out:send="{{key: result.id}}" animate:flip>
-                <Result name={result.name} {charMap} />
-            </label>
-            {/each}
-        </div>
-        <button class={name === "" ? "hidden" : "" } style="padding: 0 20px 0 20px" on:click="{() => pinResult()}">Pin</button>
+    <button class={name === ""? "hidden" : ""} style="padding: 0 20px 0 20px; margin: 10px 0 20px;" on:click="{() => pinResult()}">Pin</button>
+    <div style="display:flex; flex-direction: row; justify-content: center">
+    {#each results.filter(r => !r.pinned) as result (result.id)}
+        <label class="card" in:receive="{{key: result.id}}" out:send="{{key: result.id}}" animate:flip>
+            <Result name={result.name} {charMap} />
+        </label>
+        {/each}
     </div>
 
 
