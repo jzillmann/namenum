@@ -21,6 +21,7 @@
     div {
         color: var(--color4);
     }
+
     .underlined {
         border-bottom: 1pt solid var(--color4);
     }
@@ -33,7 +34,7 @@
         {/if}
         {#if i==crossfoots.length-1 && i >0}
             <b class="underlined">{crossfoot}</b>
-        {:else}
+        {:else if crossfoot!=0}
             <b>{crossfoot}</b>
         {/if}
     {/each}
