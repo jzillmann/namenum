@@ -121,26 +121,28 @@
     <hr />
     <br />
 
-    &nbsp;&nbsp;&nbsp;
-    {#each results.filter(r => !r.pinned) as result (result.id)}
-        <label in:receive="{{key: result.id}}" out:send="{{key: result.id}}" animate:flip>
-            <Result name={result.name} {charMap} />
-        </label>
-    {/each}
-
-    {#if name !==""}
-        <button on:click="{() => pinResult()}">Pin</button>
-    {/if}
-
-    <br/><br/><br/><br/>
-    {#if results.filter(r => r.pinned).length > 0}
-        <h3 in:fade>Pinned Items</h3>
-        {#each results.filter(r => r.pinned) as result (result.id)}
-            <label in:receive="{{key: result.id}}" out:send="{{key: result.id}}" animate:flip>
+    <div style="display:flex; flex-direction: row; justify-content: center; align-items:flex-start">
+        <div style="display:flex; flex-direction: row; justify-content: center">
+        {#each results.filter(r => !r.pinned) as result (result.id)}
+            <label class="card" in:receive="{{key: result.id}}" out:send="{{key: result.id}}" animate:flip>
                 <Result name={result.name} {charMap} />
-                <br />
             </label>
-        {/each}
+            {/each}
+        </div>
+        <button class={name === "" ? "hidden" : "" } style="padding: 0 20px 0 20px" on:click="{() => pinResult()}">Pin</button>
+    </div>
+
+
+    {#if results.filter(r => r.pinned).length > 0}
+        <h3 in:fade style="margin-top: 60px">Pinned Items</h3>
+        <div class="cardContainer">
+            {#each results.filter(r => r.pinned) as result (result.id)}
+                <label class="card" in:receive="{{key: result.id}}" out:send="{{key: result.id}}" animate:flip>
+                    <Result name={result.name} {charMap} />
+                    <br />
+                </label>
+            {/each}
+        </div>
     {/if}
 
     <div class="footer">
@@ -173,5 +175,26 @@
 
     .right {
         text-align: right;
+    }
+
+    .cardContainer {
+        display:flex;
+        flex-direction: row;
+        flex-wrap:wrap;
+        justify-content: center;
+    }
+
+    .card {
+        box-shadow: 0 4px 8px 0 var(--color3);
+        transition: 0.3s;
+        border-radius: 2px;
+        padding: 20px;
+        margin: 0 15px 15px;
+        min-height: 85px;
+        min-width: 145px;
+    }
+
+    .hidden {
+        visibility: collapse;
     }
 </style>
