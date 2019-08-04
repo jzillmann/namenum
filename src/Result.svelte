@@ -23,11 +23,7 @@
     }
 </script>
 
-<style>
-
-</style>
-
-<div style="display:flex; flex-direction: row; justify-content: center">
+<div class="container" style="display:flex; flex-direction: row; justify-content: center">
     {#each nameParts as namePart,i }
     {#if i>0}
     &nbsp;&nbsp;&nbsp;
@@ -39,3 +35,7 @@
 <div style="display:flex; flex-direction: row; justify-content: center; align-items: flex-start; flex-wrap:wrap">
     <ResultNumber numbers = {charNumberParts.flat()}/>
 </div>
+
+<style>
+
+</style>

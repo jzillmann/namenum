@@ -3,6 +3,9 @@
     import { fade, crossfade } from 'svelte/transition';
     import { quintOut } from 'svelte/easing';
     import { flip } from 'svelte/animate';
+    import Icon from 'fa-svelte'
+    import { faMapPin } from '@fortawesome/free-solid-svg-icons/faMapPin'
+    import { faTrashAlt } from '@fortawesome/free-solid-svg-icons/faTrashAlt'
     import CharacterMapping from './CharacterMapping.svelte';
     import Result from './Result.svelte';
 
@@ -15,10 +18,12 @@
     let selectedMapping = "Chaldean";
     let showMapping = false;
 
-    let uid = -1;
+    let uid = 0;
     let results = [freshResult()];
+
     $: {
-        results[uid].name = name;
+        const resultIndex = results.findIndex(r => r.id === uid - 1);
+        results[resultIndex].name = name;
 
         switch (selectedMapping) {
             case "Chaldean":
@@ -90,6 +95,10 @@
         inputElement.focus();
     }
 
+    function removeResult(result) {
+        results = results.filter(r => r !== result);
+    }
+
     function freshResult() {
         return { id: uid++, name, pinned: false };
     }
@@ -119,13 +128,16 @@
         {/if}
     </div>
     <hr />
+    <br/>
 
-    <button class={name === ""? "hidden" : ""} style="padding: 0 20px 0 20px; margin: 10px 0 20px;" on:click="{() => pinResult()}">Pin</button>
     <div style="display:flex; flex-direction: row; justify-content: center">
-    {#each results.filter(r => !r.pinned) as result (result.id)}
-        <label class="card" in:receive="{{key: result.id}}" out:send="{{key: result.id}}" animate:flip>
-            <Result name={result.name} {charMap} />
-        </label>
+        {#each results.filter(r => !r.pinned) as result (result.id)}
+            <label class="card" in:receive="{{key: result.id}}" out:send="{{key: result.id}}" animate:flip>
+                <div class={name === ""? "hidden" : "cardAction"} on:click="{() => pinResult()}">
+                    <Icon icon={faMapPin}/>
+                </div>
+                <Result name={result.name} {charMap} />
+            </label>
         {/each}
     </div>
 
@@ -135,6 +147,9 @@
         <div class="cardContainer">
             {#each results.filter(r => r.pinned) as result (result.id)}
                 <label class="card" in:receive="{{key: result.id}}" out:send="{{key: result.id}}" animate:flip>
+                    <div class="cardAction" on:click="{() => removeResult(result)}">
+                        <Icon icon={faTrashAlt}/>
+                    </div>
                     <Result name={result.name} {charMap} />
                     <br />
                 </label>
@@ -194,4 +209,14 @@
     .hidden {
         visibility: collapse;
     }
+
+
+    .cardAction {
+        position: relative;
+        float: right;
+        top: -12px;
+        right: -15px;
+        color: var(--color3);
+    }
+
 </style>

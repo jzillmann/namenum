@@ -18,7 +18,10 @@
         "sirv-cli": "^0.4.4",
         "svelte": "^3.0.0"
     },
-    "dependencies": {},
+    "dependencies": {
+        "@fortawesome/free-solid-svg-icons": "^5.10.1",
+        "fa-svelte": "^3.0.0"
+    },
     "scripts": {
         "build": "rollup -c",
         "autobuild": "rollup -c -w",
