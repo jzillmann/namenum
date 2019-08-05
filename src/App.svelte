@@ -198,7 +198,6 @@
 
     .card {
         box-shadow: 0 4px 8px 0 var(--color3);
-        transition: 0.3s;
         border-radius: 2px;
         padding: 20px;
         margin: 0 15px 15px;
