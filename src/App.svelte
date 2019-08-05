@@ -66,7 +66,7 @@
     }
 
     const [send, receive] = crossfade({
-        duration: d => Math.sqrt(d * 2000),
+        duration: d => Math.sqrt(d * 300),
 
         fallback(node, params) {
             const style = getComputedStyle(node);
@@ -132,7 +132,7 @@
 
     <div style="display:flex; flex-direction: row; justify-content: center">
         {#each results.filter(r => !r.pinned) as result (result.id)}
-            <label class="card" in:receive="{{key: result.id}}" out:send="{{key: result.id}}" animate:flip>
+            <label class="card" in:fade="{{delay: 180}}" out:send="{{key: result.id}}" animate:flip>
                 <div class={name === ""? "hidden" : "cardAction"} on:click="{() => pinResult()}">
                     <Icon icon={faMapPin}/>
                 </div>
@@ -218,5 +218,9 @@
         right: -15px;
         color: var(--color3);
     }
+
+    label {
+		user-select: none;
+	}
 
 </style>
