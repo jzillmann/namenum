@@ -10,15 +10,14 @@
 
     $: {
         nameParts = name
-            .toLowerCase()
             .split(" ")
             .filter(elem => elem !== "");
-        charParts = nameParts.map(namePart => [...namePart.toLowerCase()].filter(char => char !== ' '));
+        charParts = nameParts.map(namePart => [...namePart].filter(char => char !== ' '));
         charNumberParts = charParts.map(charPart => charPart.map(char => {
             if (!isNaN(char)) {
                 return Number(char);
             }
-            return charMap.get(char);
+            return charMap.get(char.toLowerCase());
         }));
     }
 </script>
