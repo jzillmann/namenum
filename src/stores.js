@@ -106,3 +106,21 @@ export const charMap = derived(
         return $characterMapping[key].map(char => [char, Number(key)])
     }))
 );
+
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+const initialName = getParameterByName('name');
+if (initialName) {
+    nameInput.set(initialName);
+}
+
+const initialNames = getParameterByName('names');
+if (initialNames) {
+    let uid = 0;
+    initialNames.split(',').forEach(name => {
+        activeName.pin({ id: uid++, name });
+    });
+}
