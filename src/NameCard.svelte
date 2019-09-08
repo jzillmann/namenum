@@ -64,8 +64,8 @@
 
     .cardAction {
         position: absolute;
-        top: 5%;
-        left: 84%;
+        top: 0.5em;
+        right: 1.3em;
         color: var(--color3);
     }
 
