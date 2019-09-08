@@ -33,17 +33,21 @@
         cursor: pointer;
     }
 
+    th {
+        padding: 0.14em
+    }
+
     td {
         color: var(--color4);
     }
 
-    /*Keep all other flexbox elements stable when showing the mapping*/
+    /* Keep all other flexbox elements stable when selecting another system */
     .fixedWidth {
         width: 132px;
         text-align: left;
     }
 
     .hidden {
-        visibility: collapse;
+        display: none;
     }
 </style>
