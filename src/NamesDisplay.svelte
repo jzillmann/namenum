@@ -35,8 +35,8 @@
 <div style="display:flex; justify-content: center" class={$activeName.name==="" ? "hidden" : "" }>
     {#each [$activeName] as entry (entry.id)}
         <div out:send="{{key: entry.id}}" animate:flip>
-            <NameCard name={entry.name}>  
-                <div on:click="{ () => activeName.pin($activeName) }">
+            <NameCard name={entry.name} let:hoveringControl={controlHovered}>
+                <div class="controlNormal" class:controlHovered on:click="{ () => activeName.pin($activeName) }">
                     <Icon icon={faMapPin}/>
                 </div>
             </NameCard>  
@@ -50,9 +50,9 @@
         <div class="pinnedCards">
             {#each $pinnedNames as entry (entry.id)}
             <div in:receive="{{key: entry.id}}" out:send="{{key: entry.id}}" animate:flip>
-                <NameCard name={entry.name}>
-                    <div on:click="{ () => pinnedNames.remove(entry) }">
-                        <Icon icon={faTrashAlt}/>
+                <NameCard name={entry.name} let:hoveringControl={controlHovered}>
+                    <div class="controlNormal" class:controlHovered on:click="{ () => pinnedNames.remove(entry) }">
+                        <Icon icon={faTrashAlt} style="font-size:1.9em;"/>
                     </div>
                 </NameCard>
             </div>
@@ -74,6 +74,14 @@
 
     .hidden {
         visibility: collapse;
+    }
+
+    .controlNormal {
+        opacity: 0.7
+    }
+
+    .controlHovered {
+        opacity: 1
     }
 
 </style>

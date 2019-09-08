@@ -24,6 +24,16 @@
             return $charMap.get(char.toLowerCase());
         }));
     }
+
+    let hoveringControl;
+
+    function enterControl() {
+        hoveringControl = true;
+    }
+
+    function leaveControl() {
+        hoveringControl = false;
+    }
 </script>
 
 <div class="cardContainer">
@@ -42,8 +52,8 @@
             <NameNumber numbers = {charNumberParts.flat()}/>
         </div>
     </label>
-    <div class="cardAction">
-        <slot></slot>
+    <div class="cardControl"  on:mouseenter={enterControl} on:mouseleave={leaveControl}>
+        <slot hoveringControl={hoveringControl}></slot>
     </div>
 </div>
 
@@ -62,7 +72,7 @@
         min-width: 145px;
     }
 
-    .cardAction {
+    .cardControl {
         position: absolute;
         top: 0.5em;
         right: 1.3em;
