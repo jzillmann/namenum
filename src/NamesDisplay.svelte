@@ -36,7 +36,7 @@
     {#each [$activeName] as entry (entry.id)}
         <div out:send="{{key: entry.id}}" animate:flip>
             <NameCard name={entry.name} let:hoveringControl={controlHovered}>
-                <div class="controlNormal" class:controlHovered on:click="{ () => activeName.pin($activeName) }">
+                <div class="controlNormal" class:controlHovered on:click="{ () => activeName.pin() }">
                     <Icon icon={faMapPin}/>
                 </div>
             </NameCard>  

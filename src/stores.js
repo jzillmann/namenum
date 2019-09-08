@@ -1,4 +1,4 @@
-import { writable, derived } from 'svelte/store';
+import { writable, derived, get } from 'svelte/store';
 
 /** Helper function to define and export stores in one step */
 function result(func) {
@@ -32,13 +32,14 @@ export const pinnedNames = result(() => {
 /**  Active name item containing the name plus an id which is required for the crossfade animation */
 export const activeName = result(() => {
     let uid = 0;
-    const { subscribe } = derived(nameInput, $nameInput => {
+    const store = derived(nameInput, $nameInput => {
         return { id: uid, name: $nameInput }
     })
     return {
-        subscribe,
-        pin: (value) => {
+        subscribe: store.subscribe,
+        pin: () => {
             /** Move the item to pinned names */
+            const value = get(store);
             if (value.name !== "") {
                 pinnedNames.add(value);
                 uid++;
@@ -119,8 +120,8 @@ if (initialName) {
 
 const initialNames = getParameterByName('names');
 if (initialNames) {
-    let uid = 0;
     initialNames.split(',').forEach(name => {
-        activeName.pin({ id: uid++, name });
+        nameInput.set(name);
+        activeName.pin();
     });
 }
