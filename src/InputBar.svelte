@@ -15,8 +15,9 @@
 
 <div style="display:flex; flex-direction: row; justify-content: center; align-items: flex-start; flex-wrap:wrap">
 
-    <input bind:this={inputElement} bind:value={$nameInput} type="text" autofocus autocomplete="off" autocorrect="off"
-        autocapitalize="off" spellcheck="false" on:keydown={e=> e.which === 13 && activeName.pin($activeName)}>
+    <input bind:this={inputElement} bind:value={$nameInput} type="text" size="18" autofocus autocomplete="off"
+        autocorrect="off" autocapitalize="off" spellcheck="false" on:keydown={e=> e.which === 13 &&
+    activeName.pin($activeName)}>
 
     &nbsp;&nbsp;&nbsp;
 
