@@ -1,3 +1,5 @@
+<!-- Shows crossfoot of a name in steps  -->
+
 <script>
     export let numbers;
     let crossfoots = [];

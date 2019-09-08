@@ -1,5 +1,7 @@
+<!-- Table mapping each character of a name to a number based on the choosen numerology system  -->
+
 <script>
-    import ResultNumber from './ResultNumber.svelte';
+    import NameNumber from './NameNumber.svelte';
 
     export let chars;
     export let charNumbers;
@@ -21,16 +23,6 @@
         }
     }
 </script>
-
-<style>
-    table {
-        border-bottom: 1pt solid var(--color3);
-    }
-    
-    .highlighted {
-        background-color: var(--color3);
-    }
-</style>
 
 <div>
     <table>
@@ -59,6 +51,16 @@
     </table>
     {#if partCount >1}
         <br/>
-        <ResultNumber numbers={charNumbers} />
+        <NameNumber numbers={charNumbers} />
     {/if}
 </div>
+
+<style>
+    table {
+        border-bottom: 1pt solid var(--color3);
+    }
+    
+    .highlighted {
+        background-color: var(--color3);
+    }
+</style>

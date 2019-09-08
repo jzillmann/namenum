@@ -1,3 +1,5 @@
+<!-- Table showing which character maps to which number based on the selected numerology system -->
+
 <script>
     import { fade, fly } from 'svelte/transition';
     import { characterMapping } from './stores.js';

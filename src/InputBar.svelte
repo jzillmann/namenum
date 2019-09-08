@@ -1,6 +1,8 @@
+<!-- Name input & numerology selection  -->
+
 <script>
     import { nameInput, activeName, systems, selectedSystem } from './stores.js';
-    import CharacterMappingDisplay from './CharacterMappingDisplay.svelte';
+    import CharacterMappings from './CharacterMappings.svelte';
 
     // Re-focus name input once an element is pinned
     let inputElement;
@@ -26,6 +28,6 @@
     
     &nbsp;&nbsp;&nbsp;
 
-    <CharacterMappingDisplay/>
+    <CharacterMappings/>
     
 </div>
